@@ -8,7 +8,7 @@ class No:
     anterior: No|None = None
     proximo: No|None = None
 
-class ListaDuplamenteEncadeada:
+class ListaDuplamenteEncadeadaircularcomSentinela:
     def __init__(self) -> None:
         '''Cria uma lista duplamente encadeada vazia.'''
         self.sentinela=No(None)
@@ -150,7 +150,21 @@ class ListaDuplamenteEncadeada:
         >>> print(lista)
         [10, 30, 40, 60, 70]
         '''
-        pass
+        if posicao is not None and (posicao < 0 or posicao >= self.num_elementos):
+            raise IndexError('índice inválido.')
+        
+        if self.vazia():
+            raise ValueError('lista vazia.')
+        
+        #Se só tiver um elemento
+        if self.num_elementos==1:
+            self.sentinela.proximo = self.sentinela
+            self.sentinela.anterior = self.sentinela
+
+        #Se não passar posição,tira do final
+        elif posicao is None or posicao == self.num_elementos-1: # (-1 por causa da sentinela)
+
+
 
     def consulta(self, i: int) -> Any: #inicio e fim
         '''Devolve o conteúdo do nó localizado na posição *i* da lista duplamente encadeada sem removê-lo.
