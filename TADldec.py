@@ -163,7 +163,7 @@ class ListaDuplamenteEncadeadaircularcomSentinela:
 
         #Se não passar posição,tira do final
         elif posicao is None or posicao == self.num_elementos-1: # (-1 por causa da sentinela)
-
+            
 
 
     def consulta(self, i: int) -> Any: #inicio e fim
