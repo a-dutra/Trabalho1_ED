@@ -122,47 +122,55 @@ class ListaDuplamenteEncadeadaircularcomSentinela:
         self.num_elementos+=1
 
 
-    def remove(self, posicao: int = None) -> None:
-        '''Remove o nó que está em uma **posicao** específica
-        na lista duplamente encadeada. As posições começam em 0 e o
-        valor de **posicao** deve estar entre 0 e a 
-        quantidade de elementos - 1 (último elemento da lista).
-        Se posição não for especificada, remove do fim.
+    def remove_fim(self) -> None:
+        '''
+        remove o nó que está no fim
+        da lista duplamente encadeada circular com sentinela
         Exemplos:
-        >>> lista = ListaDuplamenteEncadeada()
+        >>> lista = ListaDuplamenteEncadeadaircularcomSentinela()
         >>> for i in range(10):
         ...    lista.insere_inicio(i * 10)
         >>> print(lista)
-        [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
-        >>> lista.remove(2)
+        [90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
+        >>> lista.remove_fim()
         >>> print(lista)
-        [0, 10, 30, 40, 50, 60, 70, 80, 90]
-        >>> lista.remove(7)
+        [90, 80, 70, 60, 50, 40, 30, 20, 10]
+        >>> lista.remove_fim()
         >>> print(lista)
-        [0, 10, 30, 40, 50, 60, 70, 90]
-        >>> lista.remove(4)
+        [90, 80, 70, 60, 50, 40, 30, 20]
+        >>> lista.remove_fim()
         >>> print(lista)
-        [0, 10, 30, 40, 60, 70, 90]
-        >>> lista.remove(0)
+        [90, 80, 70, 60, 50, 40, 30]
+        >>> lista.remove_fim()
         >>> print(lista)
-        [10, 30, 40, 60, 70, 90]
-        >>> lista.remove(5)
+        [90, 80, 70, 60, 50, 40]
+        >>> lista.remove_fim()
         >>> print(lista)
-        [10, 30, 40, 60, 70]
-        '''
-        if posicao is not None and (posicao < 0 or posicao >= self.num_elementos):
-            raise IndexError('índice inválido.')
-        
+        [90, 80, 70, 60, 50]
+        >>> lista2 = ListaDuplamenteEncadeadaircularcomSentinela()
+        >>> lista2.insere_fim(2)
+        >>> print(lista2)
+        [2]
+        >>> lista2.remove_fim()
+        >>> print(lista2)
+        []
+        '''        
         if self.vazia():
             raise ValueError('lista vazia.')
         
-        #Se só tiver um elemento
-        if self.num_elementos==1:
+        #Se tiver um elemento
+        if self.num_elementos == 1:
+            self.sentinela.proximo.proximo = None  #Usado apenas para o nó deletado não apontar para lugares indesejados 
+            self.sentinela.proximo.anterior = None #[...]
             self.sentinela.proximo = self.sentinela
             self.sentinela.anterior = self.sentinela
+        else:
+            self.sentinela.anterior = self.sentinela.anterior.anterior
+            self.sentinela.anterior.proximo.anterior = None #Usado apenas para o nó deletado não apontar para lugares indesejados
+            self.sentinela.anterior.proximo.proximo = None  #[...]
+            self.sentinela.anterior.proximo = self.sentinela
 
-        #Se não passar posição,tira do final
-        elif posicao is None or posicao == self.num_elementos-1: # (-1 por causa da sentinela)
+        self.num_elementos -= 1        
 
 
 
