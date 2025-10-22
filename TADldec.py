@@ -171,9 +171,6 @@ class ListaDuplamenteEncadeadaircularcomSentinela:
             self.sentinela.anterior.proximo = self.sentinela
 
 
-
-
-
     def consulta(self, i: int) -> Any: #inicio e fim
         '''Devolve o conteúdo do nó localizado na posição *i* da lista duplamente encadeada sem removê-lo.
         Exemplos:
@@ -194,23 +191,20 @@ class ListaDuplamenteEncadeadaircularcomSentinela:
         >>> lista.consulta(1)
         2
         '''
+        if self.vazia():
+            raise ValueError("Lista vazia.")
+        if i < 0 or i >= self.num_elementos:
+            raise IndexError("índice inválido.")
+        
+    def retorna_primeiro(self):
+        '''O objetivo de primeiro() é retornar o valor (ou índice) do elemento que está na frente da deque,
+          ou seja, o maior candidato da janela atual.
+          '''
+        if self.vazia():
+            raise ValueError("Deque vazia.")
+        
+        return self.sentinela.proximo.elemento #primeiro elemento é sempre o primeiro apos a sentinela
+
+    def retorna_ultimo(self):
         pass
 
-    def busca_indice(self, elemento: Any) -> int:
-        '''
-        Devolve a posição do primeiro **elemento** encontrado na lista (considera
-        0 a primeira posição da lista). Caso **elemento** não esteja na lista
-        duplamente encadeada, o resultado será -1.
-
-        Exemplos:
-        >>> lista = ListaDuplamenteEncadeada()
-        >>> for i in range(10):
-        ...    lista.insere_inicio(i * 10)
-        >>> lista.busca_indice(45)
-        -1
-        >>> lista.busca_indice(20)
-        2
-        >>> lista.busca_indice(70)
-        7
-        '''
-        pass
